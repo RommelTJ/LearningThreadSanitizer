@@ -10,16 +10,26 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet var balanceLabel: UILabel!
+    
+    let account = Account()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        updateBalanceLabel()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    @IBAction func withdraw(_ sender: UIButton) {
+        self.account.withdraw(amount: 100, completed: updateBalanceLabel)
     }
-
+    
+    @IBAction func deposit(_ sender: UIButton) {
+        self.account.deposit(amount: 100, completed: updateBalanceLabel)
+    }
+    
+    func updateBalanceLabel() {
+        balanceLabel.text = "Balance: $\(account.balance)"
+    }
 
 }
 
